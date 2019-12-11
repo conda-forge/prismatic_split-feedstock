@@ -160,5 +160,5 @@ Feedstock Maintainers
 
 * [@douglowe](https://github.com/douglowe/)
 * [@ericpre](https://github.com/ericpre/)
-* [@tschoonj](https://github.com/tschoonj)
+* [@tschoonj](https://github.com/tschoonj/)
 
