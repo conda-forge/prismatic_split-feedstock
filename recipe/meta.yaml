@@ -15,7 +15,8 @@ source:
 
 build:
   number: {{ build }}
-  string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"
+  skip: True  # [win or py2k]
+  string: "{{ processor }}_h{{ PKG_HASH }}_{{ build }}"
 
 requirements:
   host:
@@ -23,10 +24,6 @@ requirements:
 
 outputs:
   - name: prismatic
-    build:
-      number: {{ build }}
-      skip: True  # [win]
-      string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"
     requirements:
       run:
         - {{ pin_subpackage('prismatic_cli', exact=True) }}
@@ -41,13 +38,9 @@ outputs:
         - test -f $PREFIX/Applications/prismatic-gui.app/Contents/MacOS/prismatic-gui  # [osx]
         - python -c "import pyprismatic; pyprismatic.demo()"  # [not osx]
 
-
-
   - name: prismatic_cli
     build:
-      skip: True  # [win]
-      string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"
-      script: bash ${RECIPE_DIR}/combined_build_install.sh cli  # [not win]
+      script: bash ${RECIPE_DIR}/combined_build_install.sh cli
 
     requirements:
       build:
@@ -83,9 +76,7 @@ outputs:
 
   - name: prismatic_gui
     build:
-      skip: True  # [win]
-      string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"
-      script: bash ${RECIPE_DIR}/combined_build_install.sh gui  # [not win]
+      script: bash ${RECIPE_DIR}/combined_build_install.sh gui
 
     requirements:
       build:
@@ -110,7 +101,7 @@ outputs:
         - zlib
       run:
         - zlib
-      
+
     test:
       commands:
         - command -v prismatic-gui  # [linux]
@@ -118,8 +109,7 @@ outputs:
 
   - name: pyprismatic
     build:
-      skip: True  # [win or py2k or osx]
-      string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"
+      string: "py{{ py }}_{{ processor }}_h{{ PKG_HASH }}_{{ build }}"
       script: bash ${RECIPE_DIR}/combined_build_install.sh py  # [not win]
 
     requirements:
