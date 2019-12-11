@@ -1,0 +1,40 @@
+boost:
+- 1.70.0
+c_compiler:
+- gcc
+c_compiler_version:
+- '7'
+channel_sources:
+- conda-forge,defaults
+channel_targets:
+- conda-forge main
+cxx_compiler:
+- gxx
+cxx_compiler_version:
+- '7'
+docker_image:
+- condaforge/linux-anvil-comp7
+fftw:
+- '3'
+hdf5:
+- 1.10.5
+pin_run_as_build:
+  boost:
+    max_pin: x.x.x
+  fftw:
+    max_pin: x
+  python:
+    min_pin: x.x
+    max_pin: x.x
+  qt:
+    max_pin: x.x
+  zlib:
+    max_pin: x.x
+processor:
+- cpu
+python:
+- '3.6'
+qt:
+- '5.12'
+zlib:
+- '1.2'
