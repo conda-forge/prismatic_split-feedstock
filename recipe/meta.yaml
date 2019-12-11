@@ -17,6 +17,10 @@ build:
   number: {{ build }}
   string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"
 
+requirements:
+  host:
+    - python
+
 outputs:
   - name: prismatic
     build:
