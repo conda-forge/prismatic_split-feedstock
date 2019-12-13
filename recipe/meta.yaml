@@ -22,7 +22,7 @@ outputs:
     build:
       number: {{ build }}
       skip: True  # [win]
-      string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"
+      string: "py{{ py }}_{{processor}}_h{{ PKG_HASH }}_{{ build }}"
     requirements:
       run:
         - {{ pin_subpackage('prismatic_cli', exact=True) }}
