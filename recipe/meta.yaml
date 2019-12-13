@@ -22,8 +22,8 @@ outputs:
     build:
       number: {{ build }}
       skip: True  # [win]
-      string: "py{{ py }}_{{processor}}_h{{ PKG_HASH }}_{{ build }}" # [not osx and py3k]
-      string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}" # [osx]
+      string: "py{{ py }}_{{processor}}_h{{ PKG_HASH }}_{{ build }}"  # [not osx and py3k]
+      string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"  # [osx]
     requirements:
       run:
         - {{ pin_subpackage('prismatic_cli', exact=True) }}
