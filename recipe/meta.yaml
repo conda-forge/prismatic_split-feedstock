@@ -13,22 +13,21 @@ source:
   patches:
     - patch_apple_target_lib.txt
 
-build:
-  number: {{ build }}
-  string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"
 
 outputs:
   - name: prismatic
     build:
       number: {{ build }}
-      skip: True  # [win]
-      string: "py{{ py }}_{{processor}}_h{{ PKG_HASH }}_{{ build }}"  # [not osx and py3k]
+      skip: True  # [win or py2k]
+      string: "py{{ py }}_{{processor}}_h{{ PKG_HASH }}_{{ build }}"  # [not osx]
       string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"  # [osx]
     requirements:
+      host:
+        - python  # [not osx]
       run:
         - {{ pin_subpackage('prismatic_cli', exact=True) }}
         - {{ pin_subpackage('prismatic_gui', exact=True) }}
-        - {{ pin_subpackage('pyprismatic', exact=True) }}  # [not osx and py3k]
+        - {{ pin_subpackage('pyprismatic', exact=True) }}  # [not osx]
     test:
       source_files:
         - SI100.XYZ
@@ -36,7 +35,7 @@ outputs:
         - prismatic -i SI100.XYZ
         - command -v prismatic-gui  # [linux]
         - test -f $PREFIX/Applications/prismatic-gui.app/Contents/MacOS/prismatic-gui  # [osx]
-        - python -c "import pyprismatic; pyprismatic.demo()"  # [not osx and py3k]
+        - python -c "import pyprismatic; pyprismatic.demo()"  # [not osx]
 
 
 
