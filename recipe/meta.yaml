@@ -13,6 +13,8 @@ source:
   patches:
     - patch_apple_target_lib.txt
 
+build:
+  number: {{ build }}
 
 outputs:
   - name: prismatic
