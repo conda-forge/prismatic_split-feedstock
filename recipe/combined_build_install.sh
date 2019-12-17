@@ -19,7 +19,7 @@ elif [[ $1 == "py" ]]; then
 	enable_cli=0
 	enable_gui=0
 	enable_py=1
-	build_path="build_py"
+	build_path="build_py${CONDA_PY}"
 else
 	echo "option $1 is unrecognised"
 	exit 0
