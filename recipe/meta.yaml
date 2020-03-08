@@ -12,6 +12,7 @@ source:
   sha256: 844f659575dd98999b7c4864e850a7ec735f297ab1fb6c2d2be91d7f9720fe70
   patches:
     - patch_apple_target_lib.txt  # [osx]
+    - 0001-fftw_cmake.patch  # [win]
 
 build:
   number: {{ build }}
@@ -31,20 +32,20 @@ requirements:
     - make                               # [unix]
     - ninja                              # [win]
     - cmake
+    - pkg-config
   host:
     - boost
-    - hdf5
     - fftw
+    - hdf5
     - qt
-
 
 outputs:
   - name: prismatic
     build:
       number: {{ build }}
-      skip: True  # [win or py2k]
+      skip: True  # [py2k]
       string: "py{{ py }}_{{processor}}_h{{ PKG_HASH }}_{{ build }}"  # [linux]
-      string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"  # [osx]
+      string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"  # [not linux]
     requirements:
       host:
         - python  # [linux]
@@ -52,21 +53,13 @@ outputs:
         - {{ pin_subpackage('prismatic_cli', exact=True) }}
         - {{ pin_subpackage('prismatic_gui', exact=True) }}
         - {{ pin_subpackage('pyprismatic', exact=True) }}  # [linux]
-    test:
-      source_files:
-        - SI100.XYZ
-      commands:
-        - prismatic -i SI100.XYZ
-        - command -v prismatic-gui  # [linux]
-        - test -f $PREFIX/Applications/prismatic-gui.app/Contents/MacOS/prismatic-gui  # [osx]
-        - python -c "import pyprismatic; pyprismatic.demo()"  # [linux]
 
 
   - name: prismatic_cli
     build:
-      skip: True  # [win]
       string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"
       script: bash ${RECIPE_DIR}/combined_build_install.sh cli  # [not win]
+      script: bld.bat  # [win]
 
     requirements:
       build:
@@ -82,13 +75,12 @@ outputs:
         - {{ cdt('libxxf86vm') }}            # [linux]
         - make                               # [unix]
         - cmake
+        - pkg-config
       host:
         - boost
         - hdf5
         - fftw
-        - zlib
       run:
-        - zlib
         - hdf5
         - fftw
 
@@ -103,7 +95,7 @@ outputs:
     build:
       string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"
       script: bash ${RECIPE_DIR}/combined_build_install.sh gui  # [not win]
-      script: bld.bat  # [win]
+      script: bld.bat # [win]
 
     requirements:
       build:
@@ -120,19 +112,22 @@ outputs:
         - make                               # [unix]
         - ninja                              # [win]
         - cmake
+        - pkg-config
       host:
         - boost
         - hdf5
         - fftw
         - qt
-        - zlib
       run:
-        - zlib
+        - hdf5
+        - fftw
+        - qt
 
     test:
       commands:
         - command -v prismatic-gui  # [linux]
         - test -f $PREFIX/Applications/prismatic-gui.app/Contents/MacOS/prismatic-gui  # [osx]
+        - prismatic-gui  # [win]
 
 
   - name: pyprismatic
@@ -155,6 +150,7 @@ outputs:
         - {{ cdt('libxxf86vm') }}            # [linux]
         - make                               # [unix]
         - cmake
+        - pkg-config
       host:
         - python
         - pip
@@ -163,12 +159,11 @@ outputs:
         - fftw
         - qt
         - h5py
-        - zlib
       run:
         - python
         - numpy
+        - fftw
         - h5py
-        - zlib
 
     test:
       commands:
