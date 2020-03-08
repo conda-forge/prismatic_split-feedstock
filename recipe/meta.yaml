@@ -16,20 +16,42 @@ source:
 build:
   number: {{ build }}
 
+requirements:
+  build:
+    - {{ compiler('c') }}                
+    - {{ compiler('cxx') }}              
+    - {{ cdt('libxext-devel') }}         # [linux]
+    - {{ cdt('mesa-libgl-devel') }}      # [linux]
+    - {{ cdt('mesa-dri-drivers') }}      # [linux]
+    - {{ cdt('libxau-devel') }}          # [linux]
+    - {{ cdt('libselinux-devel') }}      # [linux]
+    - {{ cdt('libxdamage') }}            # [linux]
+    - {{ cdt('libxfixes') }}             # [linux]
+    - {{ cdt('libxxf86vm') }}            # [linux]
+    - make                               # [unix]
+    - ninja                              # [win]
+    - cmake
+  host:
+    - boost
+    - hdf5
+    - fftw
+    - qt
+
+
 outputs:
   - name: prismatic
     build:
       number: {{ build }}
       skip: True  # [win or py2k]
-      string: "py{{ py }}_{{processor}}_h{{ PKG_HASH }}_{{ build }}"  # [not osx]
+      string: "py{{ py }}_{{processor}}_h{{ PKG_HASH }}_{{ build }}"  # [linux]
       string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"  # [osx]
     requirements:
       host:
-        - python  # [not osx]
+        - python  # [linux]
       run:
         - {{ pin_subpackage('prismatic_cli', exact=True) }}
         - {{ pin_subpackage('prismatic_gui', exact=True) }}
-        - {{ pin_subpackage('pyprismatic', exact=True) }}  # [not osx]
+        - {{ pin_subpackage('pyprismatic', exact=True) }}  # [linux]
     test:
       source_files:
         - SI100.XYZ
@@ -37,7 +59,7 @@ outputs:
         - prismatic -i SI100.XYZ
         - command -v prismatic-gui  # [linux]
         - test -f $PREFIX/Applications/prismatic-gui.app/Contents/MacOS/prismatic-gui  # [osx]
-        - python -c "import pyprismatic; pyprismatic.demo()"  # [not osx]
+        - python -c "import pyprismatic; pyprismatic.demo()"  # [linux]
 
 
   - name: prismatic_cli
