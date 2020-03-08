@@ -1,0 +1,32 @@
+boost:
+- '1.72'
+c_compiler:
+- vs2015
+channel_sources:
+- conda-forge,defaults
+channel_targets:
+- conda-forge main
+cxx_compiler:
+- vs2015
+fftw:
+- '3'
+hdf5:
+- 1.10.5
+pin_run_as_build:
+  boost:
+    max_pin: x.x.x
+  fftw:
+    max_pin: x
+  qt:
+    max_pin: x.x
+  zlib:
+    max_pin: x.x
+processor:
+- cpu
+qt:
+- '5.12'
+zip_keys:
+- - c_compiler
+  - cxx_compiler
+zlib:
+- '1.2'
