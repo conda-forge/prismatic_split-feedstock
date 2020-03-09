@@ -59,7 +59,7 @@ outputs:
     build:
       string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"
       script: bash ${RECIPE_DIR}/combined_build_install.sh cli  # [not win]
-      script: bld.bat  # [win]
+      script: {{RECIPE_DIR}}\bld.bat cli  # [win]
 
     requirements:
       build:
@@ -95,7 +95,7 @@ outputs:
     build:
       string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"
       script: bash ${RECIPE_DIR}/combined_build_install.sh gui  # [not win]
-      script: bld.bat # [win]
+      script: {{RECIPE_DIR}}\bld.bat gui  # [win]
 
     requirements:
       build:
