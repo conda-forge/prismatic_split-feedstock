@@ -588,5 +588,3 @@ index 8478d194..00000000
 -    SET (FFTW_EXECUTABLE_LIBRARIES fftw3f fftw3f_threads)
 -ENDIF (${ON_UNIX})
 -- 
-2.21.0.windows.1
-

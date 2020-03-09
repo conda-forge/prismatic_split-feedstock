@@ -13,6 +13,7 @@ source:
   patches:
     - patch_apple_target_lib.txt  # [osx]
     - 0001-fftw_cmake.patch  # [win]
+    - 0001-Fix-GUI_SOURCE_FILE-in-CMakeLists.txt.patch
 
 build:
   number: {{ build }}
@@ -33,11 +34,6 @@ requirements:
     - ninja                              # [win]
     - cmake
     - pkg-config
-  host:
-    - boost
-    - fftw
-    - hdf5
-    - qt
 
 
 outputs:
@@ -130,7 +126,7 @@ outputs:
       commands:
         - command -v prismatic-gui  # [linux]
         - test -f $PREFIX/Applications/prismatic-gui.app/Contents/MacOS/prismatic-gui  # [osx]
-        - prismatic-gui  # [win]
+        - where prismatic-gui  # [win]
 
 
   - name: pyprismatic
