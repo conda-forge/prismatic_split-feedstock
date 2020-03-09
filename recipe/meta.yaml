@@ -31,7 +31,6 @@ requirements:
     - {{ cdt('libxfixes') }}             # [linux]
     - {{ cdt('libxxf86vm') }}            # [linux]
     - make                               # [unix]
-    - ninja                              # [win]
     - cmake
     - pkg-config
 
@@ -131,9 +130,10 @@ outputs:
 
   - name: pyprismatic
     build:
-      skip: True  # [win or py2k or osx]
+      skip: True  # [py2k or osx]
       string: "py{{ py }}_{{processor}}_h{{ PKG_HASH }}_{{ build }}"
       script: bash ${RECIPE_DIR}/combined_build_install.sh py  # [not win]
+      script: {{ RECIPE_DIR }}\build_pyprismatic.bat # [win]
 
     requirements:
       build:
@@ -152,11 +152,9 @@ outputs:
         - pkg-config
       host:
         - python
-        - pip
         - boost
         - hdf5
         - fftw
-        - qt
         - h5py
       run:
         - boost
