@@ -39,6 +39,7 @@ requirements:
     - hdf5
     - qt
 
+
 outputs:
   - name: prismatic
     build:
@@ -59,7 +60,7 @@ outputs:
     build:
       string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"
       script: bash ${RECIPE_DIR}/combined_build_install.sh cli  # [not win]
-      script: {{RECIPE_DIR}}\bld.bat cli  # [win]
+      script: {{ RECIPE_DIR }}\build.bat cli  # [win]
 
     requirements:
       build:
@@ -81,6 +82,7 @@ outputs:
         - hdf5
         - fftw
       run:
+        - boost
         - hdf5
         - fftw
 
@@ -95,7 +97,7 @@ outputs:
     build:
       string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"
       script: bash ${RECIPE_DIR}/combined_build_install.sh gui  # [not win]
-      script: {{RECIPE_DIR}}\bld.bat gui  # [win]
+      script: {{ RECIPE_DIR }}\build.bat gui  # [win]
 
     requirements:
       build:
@@ -119,6 +121,7 @@ outputs:
         - fftw
         - qt
       run:
+        - boost
         - hdf5
         - fftw
         - qt
@@ -160,6 +163,7 @@ outputs:
         - qt
         - h5py
       run:
+        - boost
         - python
         - numpy
         - fftw

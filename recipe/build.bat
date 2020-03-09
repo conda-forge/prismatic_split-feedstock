@@ -7,6 +7,7 @@ if "%1"=="cli" (set cli=1) else (set cli=0)
 
 if "%1"=="gui" (set gui=1) else (set gui=0)
 
+echo "1 is" %1
 echo "cli is" %cli% "and gui is" %gui%
 
 :: Configure using the CMakeFiles
