@@ -40,15 +40,15 @@ outputs:
     build:
       number: {{ build }}
       skip: True  # [py2k]
-      string: "py{{ py }}_{{processor}}_h{{ PKG_HASH }}_{{ build }}"  # [linux]
-      string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"  # [not linux]
+      string: "py{{ py }}_{{processor}}_h{{ PKG_HASH }}_{{ build }}"  # [not osx]
+      string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"  # [osx]
     requirements:
       host:
-        - python  # [linux]
+        - python  # [not osx]
       run:
         - {{ pin_subpackage('prismatic_cli', exact=True) }}
         - {{ pin_subpackage('prismatic_gui', exact=True) }}
-        - {{ pin_subpackage('pyprismatic', exact=True) }}  # [linux]
+        - {{ pin_subpackage('pyprismatic', exact=True) }}  # [not osx]
 
 
   - name: prismatic_cli
@@ -107,7 +107,6 @@ outputs:
         - {{ cdt('libxfixes') }}             # [linux]
         - {{ cdt('libxxf86vm') }}            # [linux]
         - make                               # [unix]
-        - ninja                              # [win]
         - cmake
         - pkg-config
       host:
@@ -151,6 +150,7 @@ outputs:
         - cmake
         - pkg-config
       host:
+        - setuptools
         - python
         - boost
         - hdf5
