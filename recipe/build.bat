@@ -7,6 +7,14 @@ if "%1"=="gui" (set gui=1 && set build=build_gui) else (set gui=0)
 echo "1 is" %1
 echo "cli is" %cli% "and gui is" %gui%
 
+set MENU_DIR=%PREFIX%\Menu
+if not exist %MENU_DIR% mkdir %MENU_DIR%
+
+if %gui%==1 (
+  copy %RECIPE_DIR%\prismatic.ico %MENU_DIR%
+  copy %RECIPE_DIR%\menu-windows.json %MENU_DIR%\prismatic_gui.json
+)
+
 :: Make a build folder and change to it.
 mkdir %build% && cd %build%
 

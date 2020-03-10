@@ -4,8 +4,8 @@
     [
         {
             "name": "Prismatic",
-            "pywscript": "${PYTHON_SCRIPTS}/prismatic.exe",
+            "script": "${PREFIX}/Library/bin/prismatic-gui.exe",
             "icon": "${MENU_DIR}/prismatic.ico"
-        },
+        }
     ]
 }

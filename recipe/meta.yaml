@@ -126,9 +126,11 @@ outputs:
         - command -v prismatic-gui  # [linux]
         - test -f $PREFIX/Applications/prismatic-gui.app/Contents/MacOS/prismatic-gui  # [osx]
         - where prismatic-gui  # [win]
+        - if not exist %PREFIX%\\Menu\\prismatic_gui.json exit 1  # [win]
+        - if not exist %PREFIX%\\Menu\\prismatic.ico exit 1  # [win]
 
     app:
-      entry: prismatic
+      entry: prismatic-gui
       icon: prismatic.ico
       summary:  "Prismatic"
       type: desk
