@@ -14,6 +14,7 @@ source:
     - patch_apple_target_lib.txt  # [osx]
     - 0001-fftw_cmake.patch  # [win]
     - 0001-Fix-GUI_SOURCE_FILE-in-CMakeLists.txt.patch
+    - 0001-Fix-python-blinding-on-windows.patch  # [win]
 
 build:
   number: {{ build }}
