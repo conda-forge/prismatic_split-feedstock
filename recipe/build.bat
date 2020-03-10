@@ -1,19 +1,20 @@
 setlocal EnableDelayedExpansion
 
-:: Make a build folder and change to it.
-mkdir build && cd build
+if "%1"=="cli" (set cli=1 && set build=build_cli) else (set cli=0)
 
-if "%1"=="cli" (set cli=1) else (set cli=0)
-
-if "%1"=="gui" (set gui=1) else (set gui=0)
+if "%1"=="gui" (set gui=1 && set build=build_gui) else (set gui=0)
 
 echo "1 is" %1
 echo "cli is" %cli% "and gui is" %gui%
+
+:: Make a build folder and change to it.
+mkdir %build% && cd %build%
 
 :: Configure using the CMakeFiles
 cmake -G "NMake Makefiles" ^
       -D PRISMATIC_ENABLE_CLI=%cli% ^
       -D PRISMATIC_ENABLE_GUI=%gui% ^
+	  -D PRISMATIC_ENABLE_PYPRISMATIC=0 ^
       -D PRISMATIC_ENABLE_GPU=0 ^
       -D PRISMATIC_ENABLE_DOUBLE_PRECISION=0 ^
       -D HDF5_DIR=%LIBRARY_PREFIX%\cmake\hdf5 ^
