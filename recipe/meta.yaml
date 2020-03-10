@@ -126,6 +126,12 @@ outputs:
         - test -f $PREFIX/Applications/prismatic-gui.app/Contents/MacOS/prismatic-gui  # [osx]
         - where prismatic-gui  # [win]
 
+    app:
+      entry: prismatic
+      icon: prismatic.ico
+      summary:  "Prismatic"
+      type: desk
+
 
   - name: pyprismatic
     build:
