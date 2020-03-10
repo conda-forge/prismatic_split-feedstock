@@ -131,7 +131,7 @@ outputs:
     build:
       skip: True  # [py2k or osx]
       string: "py{{ py }}_{{processor}}_h{{ PKG_HASH }}_{{ build }}"
-      script: bash ${RECIPE_DIR}/combined_build_install.sh py  # [not win]
+      script: bash ${RECIPE_DIR}/build_pyprismatic.sh  # [not win]
       script: {{ RECIPE_DIR }}\build_pyprismatic.bat # [win]
 
     requirements:
