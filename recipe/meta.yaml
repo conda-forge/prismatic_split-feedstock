@@ -52,6 +52,13 @@ outputs:
         - {{ pin_subpackage('prismatic_gui', exact=True) }}
         - {{ pin_subpackage('pyprismatic', exact=True) }}  # [not osx]
 
+    test:
+      commands:
+        - command -v prismatic-gui  # [linux]
+        - test -f $PREFIX/Applications/prismatic-gui.app/Contents/MacOS/prismatic-gui  # [osx]
+        - where prismatic-gui  # [win]
+        - where prismatic  # [win]
+        - python -c "import pyprismatic; pyprismatic.demo()"
 
   - name: prismatic_cli
     build:
@@ -142,7 +149,7 @@ outputs:
       skip: True  # [py2k or osx]
       string: "py{{ py }}_{{processor}}_h{{ PKG_HASH }}_{{ build }}"
       script: bash ${RECIPE_DIR}/build_pyprismatic.sh  # [not win]
-      script: {{ RECIPE_DIR }}\build_pyprismatic.bat # [win]
+      script: {{ RECIPE_DIR }}\build_pyprismatic.bat  # [win]
 
     requirements:
       build:
