@@ -58,7 +58,7 @@ outputs:
         - test -f $PREFIX/Applications/prismatic-gui.app/Contents/MacOS/prismatic-gui  # [osx]
         - where prismatic-gui  # [win]
         - where prismatic  # [win]
-        - python -c "import pyprismatic; pyprismatic.demo()"
+        - python -c "import pyprismatic; pyprismatic.demo()"  # [not osx]
 
   - name: prismatic_cli
     build:
