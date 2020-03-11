@@ -27,8 +27,8 @@ pin_run_as_build:
 processor:
 - cpu
 python:
-- '3.6'
-- '3.7'
+- 3.6.* *_cpython
+- 3.7.* *_cpython
 qt:
 - '5.12'
 zip_keys:
