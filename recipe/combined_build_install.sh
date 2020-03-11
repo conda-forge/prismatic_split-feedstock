@@ -35,7 +35,29 @@ cmake -D PRISMATIC_ENABLE_GUI=$enable_gui \
 	-D PRISMATIC_ENABLE_PYPRISMATIC=0 \
 	-D CMAKE_INSTALL_PREFIX=$PREFIX \
 	-D CMAKE_PREFIX_PATH=${PREFIX} \
-	../ 
+	../
+
+make -j${CPU_COUNT}
+
+make install
+
+# exit when don't build with double precision (only for cli)
+if [[ "$1" != "cli" ]] ; then exit 0 ; fi
+
+echo "Building with double precision"
+
+build_path="build_cli_double"
+cd .. && mkdir $build_path  && cd $build_path 
+
+cmake -D PRISMATIC_ENABLE_GUI=$enable_gui \
+	-D PRISMATIC_ENABLE_CLI=$enable_cli \
+	-D PRISMATIC_ENABLE_GPU=$enable_gpu \
+	-D PRISMATIC_ENABLE_PYPRISMATIC=0 \
+	-D PRISMATIC_ENABLE_DOUBLE_PRECISION=1 \
+	-D OUTPUT_NAME="prismatic-double"\
+	-D CMAKE_INSTALL_PREFIX=$PREFIX \
+	-D CMAKE_PREFIX_PATH=${PREFIX} \
+	../
 
 make -j${CPU_COUNT}
 

@@ -12,7 +12,8 @@ source:
   sha256: 844f659575dd98999b7c4864e850a7ec735f297ab1fb6c2d2be91d7f9720fe70
   patches:
     - patch_apple_target_lib.txt  # [osx]
-    - 0001-fftw_cmake.patch  # [win]
+    - 0001-fftw_cmake.patch
+    - 0002-Set-output-name-for-cmake.patch
     - 0001-Fix-GUI_SOURCE_FILE-in-CMakeLists.txt.patch
     - 0001-Fix-python-blinding-on-windows.patch  # [win]
 
@@ -87,7 +88,7 @@ outputs:
         - SI100.XYZ
       commands:
         - prismatic -i SI100.XYZ
-
+        - prismatic-double -i SI100.XYZ
 
   - name: prismatic_gui
     build:
