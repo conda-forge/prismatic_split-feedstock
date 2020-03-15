@@ -1,5 +1,7 @@
 boost:
 - '1.72'
+boost_cpp:
+- '1.72'
 c_compiler:
 - gcc
 c_compiler_version:
@@ -20,6 +22,8 @@ hdf5:
 - 1.10.5
 pin_run_as_build:
   boost:
+    max_pin: x.x.x
+  boost-cpp:
     max_pin: x.x.x
   fftw:
     max_pin: x
