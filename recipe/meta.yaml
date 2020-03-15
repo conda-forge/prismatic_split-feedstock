@@ -82,11 +82,11 @@ outputs:
         - cmake
         - pkg-config
       host:
-        - boost
+        - boost-cpp
         - hdf5
         - fftw
       run:
-        - boost
+        - boost-cpp
         - hdf5
         - fftw
 
@@ -119,12 +119,12 @@ outputs:
         - cmake
         - pkg-config
       host:
-        - boost
+        - boost-cpp
         - hdf5
         - fftw
         - qt
       run:
-        - boost
+        - boost-cpp
         - hdf5
         - fftw
         - qt
