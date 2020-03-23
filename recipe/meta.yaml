@@ -137,13 +137,6 @@ outputs:
         - if not exist %PREFIX%\\Menu\\prismatic_gui.json exit 1  # [win]
         - if not exist %PREFIX%\\Menu\\prismatic.ico exit 1  # [win]
 
-    app:
-      entry: prismatic-gui
-      icon: prismatic.ico
-      summary:  "Prismatic"
-      type: desk
-
-
   - name: pyprismatic
     build:
       skip: True  # [py2k or osx]
