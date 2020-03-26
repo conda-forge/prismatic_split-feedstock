@@ -19,11 +19,13 @@ else
 fi 
 
 
-if [[ $processor == "gpu" ]]; then
+if [[ $cuda_compiler_version != "None" ]]; then
 	enable_gpu=1
 else
 	enable_gpu=0
 fi
+
+echo "enable_gpu is $enable_gpu"
 
 
 # build process
