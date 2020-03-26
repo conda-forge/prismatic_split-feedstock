@@ -1,5 +1,5 @@
 {% set version = "1.2.1" %}
-{% set build = 2 %}
+{% set build = 3 %}
 
 {% set processor = processor or 'cpu' %}
 
@@ -11,16 +11,37 @@ source:
   url: https://github.com/prism-em/prismatic/archive/{{ version }}.tar.gz
   sha256: 844f659575dd98999b7c4864e850a7ec735f297ab1fb6c2d2be91d7f9720fe70
   patches:
-    - patch_apple_target_lib.txt
+    - patch_apple_target_lib.txt  # [osx]
+    - 0001-fftw_cmake.patch
+    - 0002-Set-output-name-for-cmake.patch
+    - 0001-Fix-GUI_SOURCE_FILE-in-CMakeLists.txt.patch
+    - 0001-Fix-python-blinding-on-windows.patch  # [win]
 
 build:
   number: {{ build }}
+
+requirements:
+  build:
+    - {{ compiler('c') }}                
+    - {{ compiler('cxx') }}              
+    - {{ cdt('libxext-devel') }}         # [linux]
+    - {{ cdt('mesa-libgl-devel') }}      # [linux]
+    - {{ cdt('mesa-dri-drivers') }}      # [linux]
+    - {{ cdt('libxau-devel') }}          # [linux]
+    - {{ cdt('libselinux-devel') }}      # [linux]
+    - {{ cdt('libxdamage') }}            # [linux]
+    - {{ cdt('libxfixes') }}             # [linux]
+    - {{ cdt('libxxf86vm') }}            # [linux]
+    - make                               # [unix]
+    - cmake
+    - pkg-config
+
 
 outputs:
   - name: prismatic
     build:
       number: {{ build }}
-      skip: True  # [win or py2k]
+      skip: True  # [py2k]
       string: "py{{ py }}_{{processor}}_h{{ PKG_HASH }}_{{ build }}"  # [not osx]
       string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"  # [osx]
     requirements:
@@ -30,22 +51,20 @@ outputs:
         - {{ pin_subpackage('prismatic_cli', exact=True) }}
         - {{ pin_subpackage('prismatic_gui', exact=True) }}
         - {{ pin_subpackage('pyprismatic', exact=True) }}  # [not osx]
+
     test:
-      source_files:
-        - SI100.XYZ
       commands:
-        - prismatic -i SI100.XYZ
         - command -v prismatic-gui  # [linux]
         - test -f $PREFIX/Applications/prismatic-gui.app/Contents/MacOS/prismatic-gui  # [osx]
+        - where prismatic-gui  # [win]
+        - where prismatic  # [win]
         - python -c "import pyprismatic; pyprismatic.demo()"  # [not osx]
-
-
 
   - name: prismatic_cli
     build:
-      skip: True  # [win]
       string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"
       script: bash ${RECIPE_DIR}/combined_build_install.sh cli  # [not win]
+      script: {{ RECIPE_DIR }}\build.bat cli  # [win]
 
     requirements:
       build:
@@ -61,29 +80,28 @@ outputs:
         - {{ cdt('libxxf86vm') }}            # [linux]
         - make                               # [unix]
         - cmake
+        - pkg-config
       host:
-        - boost
+        - boost-cpp
         - hdf5
         - fftw
-        - zlib
       run:
-        - zlib
+        - boost-cpp
         - hdf5
         - fftw
-
 
     test:
       source_files:
         - SI100.XYZ
       commands:
         - prismatic -i SI100.XYZ
-
+        - prismatic-double -i SI100.XYZ
 
   - name: prismatic_gui
     build:
-      skip: True  # [win]
       string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"
       script: bash ${RECIPE_DIR}/combined_build_install.sh gui  # [not win]
+      script: {{ RECIPE_DIR }}\build.bat gui  # [win]
 
     requirements:
       build:
@@ -99,26 +117,32 @@ outputs:
         - {{ cdt('libxxf86vm') }}            # [linux]
         - make                               # [unix]
         - cmake
+        - pkg-config
       host:
-        - boost
+        - boost-cpp
         - hdf5
         - fftw
         - qt
-        - h5py
-        - zlib
       run:
-        - zlib
-      
+        - boost-cpp
+        - hdf5
+        - fftw
+        - qt
+
     test:
       commands:
         - command -v prismatic-gui  # [linux]
         - test -f $PREFIX/Applications/prismatic-gui.app/Contents/MacOS/prismatic-gui  # [osx]
+        - where prismatic-gui  # [win]
+        - if not exist %PREFIX%\\Menu\\prismatic_gui.json exit 1  # [win]
+        - if not exist %PREFIX%\\Menu\\prismatic.ico exit 1  # [win]
 
   - name: pyprismatic
     build:
-      skip: True  # [win or py2k or osx]
+      skip: True  # [py2k or osx]
       string: "py{{ py }}_{{processor}}_h{{ PKG_HASH }}_{{ build }}"
-      script: bash ${RECIPE_DIR}/combined_build_install.sh py  # [not win]
+      script: bash ${RECIPE_DIR}/build_pyprismatic.sh  # [not win]
+      script: {{ RECIPE_DIR }}\build_pyprismatic.bat  # [win]
 
     requirements:
       build:
@@ -134,20 +158,20 @@ outputs:
         - {{ cdt('libxxf86vm') }}            # [linux]
         - make                               # [unix]
         - cmake
+        - pkg-config
       host:
+        - setuptools
         - python
-        - pip
         - boost
         - hdf5
         - fftw
-        - qt
         - h5py
-        - zlib
       run:
+        - boost
         - python
         - numpy
+        - fftw
         - h5py
-        - zlib
 
     test:
       commands:

@@ -1,0 +1,21 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c7791812..fded9320 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -171,13 +171,13 @@ if (PRISMATIC_ENABLE_CLI)
+ endif (PRISMATIC_ENABLE_CLI)
+ 
+ if(APPLE)
+-  list(APPEND GUI_SOURCE_FILES ../Qt/icons/prismatic-icon.icns)
++  list(APPEND GUI_SOURCE_FILES Qt/icons/prismatic-icon.icns)
+   set(MACOSX_BUNDLE_ICON_FILE prismatic-icon.icns)
+   set(MACOSX_BUNDLE_BUNDLE_VERSION 0.1)
+-  set_source_files_properties(../Qt/icons/prismatic-icon.icns PROPERTIES
++  set_source_files_properties(Qt/icons/prismatic-icon.icns PROPERTIES
+     MACOSX_PACKAGE_LOCATION Resources)
+ elseif(WIN32)
+-  list(APPEND GUI_SOURCE_FILES ../Qt/icons/prismatic.ico)
++  list(APPEND GUI_SOURCE_FILES Qt/icons/prismatic.ico)
+ endif()
+ 
+ if (PRISMATIC_ENABLE_GUI)
