@@ -97,8 +97,10 @@ outputs:
       source_files:
         - SI100.XYZ
       commands:
-        - prismatic -i SI100.XYZ
-        - prismatic-double -i SI100.XYZ
+        - prismatic -i SI100.XYZ  # [processor == "cpu"]
+        - prismatic-double -i SI100.XYZ  # [processor == "cpu"]
+        - test $PREFIX/bin/prismatic  # [processor == "gpu"]
+        - test $PREFIX/bin/prismatic-double  # [processor == "gpu"]
 
   - name: prismatic_gui
     build:

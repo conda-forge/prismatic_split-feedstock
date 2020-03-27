@@ -20,6 +20,10 @@ fi
 
 if [[ $cuda_compiler_version != "None" && $OSTYPE == "linux-gnu" ]]; then
 	enable_gpu=1
+	# remove -std=c++17 from CXXFLAGS for compatibility with nvcc
+	echo "CXXFLAGS: $CXXFLAGS"
+	export CXXFLAGS="$(echo $CXXFLAGS | sed -e 's/ -std=[^ ]*//')"
+	echo "CXXFLAGS after removing -std=c++17: $CXXFLAGS"
 else
 	enable_gpu=0
 fi
@@ -63,4 +67,3 @@ cmake -D PRISMATIC_ENABLE_GUI=$enable_gui \
 make -j${CPU_COUNT}
 
 make install
-
