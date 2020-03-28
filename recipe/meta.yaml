@@ -85,9 +85,10 @@ outputs:
         - hdf5
         - fftw
       run:
-        - boost-cpp
         - hdf5
         - fftw
+      ignore_run_exports:
+        - boost-cpp
 
     test:
       source_files:
@@ -123,10 +124,11 @@ outputs:
         - fftw
         - qt
       run:
-        - boost-cpp
         - hdf5
         - fftw
         - qt
+      ignore_run_exports:
+        - boost-cpp
 
     test:
       commands:
@@ -166,11 +168,12 @@ outputs:
         - fftw
         - h5py
       run:
-        - boost
         - python
         - numpy
         - fftw
         - h5py
+      ignore_run_exports:
+        - boost
 
     test:
       commands:
