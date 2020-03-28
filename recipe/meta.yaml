@@ -11,9 +11,9 @@ source:
   url: https://github.com/prism-em/prismatic/archive/{{ version }}.tar.gz
   sha256: 844f659575dd98999b7c4864e850a7ec735f297ab1fb6c2d2be91d7f9720fe70
   patches:
-    - patch_apple_target_lib.txt  # [osx]
+    - 0001-fix_pyprismatic_macos.patch  # [osx]
     - 0001-fftw_cmake.patch
-    - 0002-Set-output-name-for-cmake.patch
+    - 0002-Set-output-name-for-cmake.patch  # [not osx]
     - 0001-Fix-GUI_SOURCE_FILE-in-CMakeLists.txt.patch
     - 0001-Fix-python-blinding-on-windows.patch  # [win]
 
