@@ -44,7 +44,7 @@ outputs:
     build:
       number: {{ build }}
       skip: True  # [py2k]
-      string: "py{{ py }}_{{processor}}_h{{ PKG_HASH }}_{{ build }}"
+      string: "{{processor}}_py{{ py }}h{{ PKG_HASH }}_{{ build }}"
     requirements:
       host:
         - python
