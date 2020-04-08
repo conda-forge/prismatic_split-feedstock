@@ -1,5 +1,5 @@
 {% set version = "1.2.1" %}
-{% set build = 3 %}
+{% set build = 4 %}
 
 {% set processor = processor or 'cpu' %}
 
@@ -11,9 +11,9 @@ source:
   url: https://github.com/prism-em/prismatic/archive/{{ version }}.tar.gz
   sha256: 844f659575dd98999b7c4864e850a7ec735f297ab1fb6c2d2be91d7f9720fe70
   patches:
-    - patch_apple_target_lib.txt  # [osx]
+    - 0001-fix_pyprismatic_macos.patch  # [osx]
     - 0001-fftw_cmake.patch
-    - 0002-Set-output-name-for-cmake.patch
+    - 0002-Set-output-name-for-cmake.patch  # [not osx]
     - 0001-Fix-GUI_SOURCE_FILE-in-CMakeLists.txt.patch
     - 0001-Fix-python-blinding-on-windows.patch  # [win]
 
@@ -42,15 +42,14 @@ outputs:
     build:
       number: {{ build }}
       skip: True  # [py2k]
-      string: "py{{ py }}_{{processor}}_h{{ PKG_HASH }}_{{ build }}"  # [not osx]
-      string: "{{processor}}_h{{ PKG_HASH }}_{{ build }}"  # [osx]
+      string: "py{{ py }}_{{processor}}_h{{ PKG_HASH }}_{{ build }}"
     requirements:
       host:
-        - python  # [not osx]
+        - python
       run:
         - {{ pin_subpackage('prismatic_cli', exact=True) }}
         - {{ pin_subpackage('prismatic_gui', exact=True) }}
-        - {{ pin_subpackage('pyprismatic', exact=True) }}  # [not osx]
+        - {{ pin_subpackage('pyprismatic', exact=True) }}
 
     test:
       commands:
@@ -58,7 +57,7 @@ outputs:
         - test -f $PREFIX/Applications/prismatic-gui.app/Contents/MacOS/prismatic-gui  # [osx]
         - where prismatic-gui  # [win]
         - where prismatic  # [win]
-        - python -c "import pyprismatic; pyprismatic.demo()"  # [not osx]
+        - python -c "import pyprismatic; pyprismatic.demo()"
 
   - name: prismatic_cli
     build:
@@ -86,9 +85,10 @@ outputs:
         - hdf5
         - fftw
       run:
-        - boost-cpp
         - hdf5
         - fftw
+      ignore_run_exports:
+        - boost-cpp
 
     test:
       source_files:
@@ -124,10 +124,11 @@ outputs:
         - fftw
         - qt
       run:
-        - boost-cpp
         - hdf5
         - fftw
         - qt
+      ignore_run_exports:
+        - boost-cpp
 
     test:
       commands:
@@ -139,7 +140,7 @@ outputs:
 
   - name: pyprismatic
     build:
-      skip: True  # [py2k or osx]
+      skip: True  # [py2k]
       string: "py{{ py }}_{{processor}}_h{{ PKG_HASH }}_{{ build }}"
       script: bash ${RECIPE_DIR}/build_pyprismatic.sh  # [not win]
       script: {{ RECIPE_DIR }}\build_pyprismatic.bat  # [win]
@@ -167,11 +168,12 @@ outputs:
         - fftw
         - h5py
       run:
-        - boost
         - python
         - numpy
         - fftw
         - h5py
+      ignore_run_exports:
+        - boost
 
     test:
       commands:
