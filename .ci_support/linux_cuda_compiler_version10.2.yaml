@@ -3,13 +3,23 @@ boost:
 boost_cpp:
 - '1.72'
 c_compiler:
-- vs2017
+- gcc
+c_compiler_version:
+- '7'
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
+cuda_compiler:
+- nvcc
+cuda_compiler_version:
+- '10.2'
 cxx_compiler:
-- vs2017
+- gxx
+cxx_compiler_version:
+- '7'
+docker_image:
+- condaforge/linux-anvil-cuda:10.2
 fftw:
 - '3'
 hdf5:
@@ -31,3 +41,6 @@ python:
 - 3.7.* *_cpython
 qt:
 - '5.12'
+zip_keys:
+- - cuda_compiler_version
+  - docker_image

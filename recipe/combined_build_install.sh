@@ -18,9 +18,12 @@ else
 	exit 0
 fi 
 
-
-if [[ $processor == "gpu" ]]; then
+if [[ $cuda_compiler_version != "None" && $OSTYPE == "linux-gnu" ]]; then
 	enable_gpu=1
+	# remove -std=c++17 from CXXFLAGS for compatibility with nvcc
+	echo "CXXFLAGS: $CXXFLAGS"
+	export CXXFLAGS="$(echo $CXXFLAGS | sed -e 's/ -std=[^ ]*//')"
+	echo "CXXFLAGS after removing -std=c++17: $CXXFLAGS"
 else
 	enable_gpu=0
 fi
@@ -33,6 +36,7 @@ cmake -D PRISMATIC_ENABLE_GUI=$enable_gui \
 	-D PRISMATIC_ENABLE_CLI=$enable_cli \
 	-D PRISMATIC_ENABLE_GPU=$enable_gpu \
 	-D PRISMATIC_ENABLE_PYPRISMATIC=0 \
+	-D CUDA_TOOLKIT_ROOT_DIR=$CUDA_HOME \
 	-D CMAKE_INSTALL_PREFIX=$PREFIX \
 	-D CMAKE_PREFIX_PATH=${PREFIX} \
 	../
@@ -53,6 +57,7 @@ cmake -D PRISMATIC_ENABLE_GUI=$enable_gui \
 	-D PRISMATIC_ENABLE_CLI=$enable_cli \
 	-D PRISMATIC_ENABLE_GPU=$enable_gpu \
 	-D PRISMATIC_ENABLE_PYPRISMATIC=0 \
+	-D CUDA_TOOLKIT_ROOT_DIR=$CUDA_HOME \
 	-D PRISMATIC_ENABLE_DOUBLE_PRECISION=1 \
 	-D OUTPUT_NAME="prismatic-double"\
 	-D CMAKE_INSTALL_PREFIX=$PREFIX \
@@ -62,4 +67,3 @@ cmake -D PRISMATIC_ENABLE_GUI=$enable_gui \
 make -j${CPU_COUNT}
 
 make install
-

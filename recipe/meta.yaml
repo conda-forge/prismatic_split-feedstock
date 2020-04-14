@@ -1,7 +1,8 @@
 {% set version = "1.2.1" %}
-{% set build = 4 %}
+{% set build = 5 %}
 
-{% set processor = processor or 'cpu' %}
+{% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [linux64]
+{% set processor = "cpu" %}  # [not linux64]
 
 package:
   name: prismatic_split
@@ -22,8 +23,9 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}                
-    - {{ compiler('cxx') }}              
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ compiler('cuda') }}  # [linux64 and cuda_compiler_version != "None"]
     - {{ cdt('libxext-devel') }}         # [linux]
     - {{ cdt('mesa-libgl-devel') }}      # [linux]
     - {{ cdt('mesa-dri-drivers') }}      # [linux]
@@ -42,7 +44,7 @@ outputs:
     build:
       number: {{ build }}
       skip: True  # [py2k]
-      string: "py{{ py }}_{{processor}}_h{{ PKG_HASH }}_{{ build }}"
+      string: "{{processor}}_py{{ py }}h{{ PKG_HASH }}_{{ build }}"
     requirements:
       host:
         - python
@@ -57,7 +59,8 @@ outputs:
         - test -f $PREFIX/Applications/prismatic-gui.app/Contents/MacOS/prismatic-gui  # [osx]
         - where prismatic-gui  # [win]
         - where prismatic  # [win]
-        - python -c "import pyprismatic; pyprismatic.demo()"
+        - python -c "import pyprismatic; pyprismatic.demo()"  # [(linux64 and cuda_compiler_version == "None") or not linux64]
+        - python -c "import pyprismatic"  # [linux64 and cuda_compiler_version != "None"]
 
   - name: prismatic_cli
     build:
@@ -67,8 +70,9 @@ outputs:
 
     requirements:
       build:
-        - {{ compiler('c') }}                
-        - {{ compiler('cxx') }}              
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - {{ compiler('cuda') }}  # [linux64 and cuda_compiler_version != "None"]
         - {{ cdt('libxext-devel') }}         # [linux]
         - {{ cdt('mesa-libgl-devel') }}      # [linux]
         - {{ cdt('mesa-dri-drivers') }}      # [linux]
@@ -94,8 +98,10 @@ outputs:
       source_files:
         - SI100.XYZ
       commands:
-        - prismatic -i SI100.XYZ
-        - prismatic-double -i SI100.XYZ
+        - prismatic -i SI100.XYZ  # [(linux64 and cuda_compiler_version == "None") or not linux64]
+        - prismatic-double -i SI100.XYZ  # [(linux64 and cuda_compiler_version == "None") or not linux64]
+        - test $PREFIX/bin/prismatic  # [linux64 and cuda_compiler_version != "None"]
+        - test $PREFIX/bin/prismatic-double  # [linux64 and cuda_compiler_version != "None"]
 
   - name: prismatic_gui
     build:
@@ -105,8 +111,9 @@ outputs:
 
     requirements:
       build:
-        - {{ compiler('c') }}                
-        - {{ compiler('cxx') }}              
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - {{ compiler('cuda') }}  # [linux64 and cuda_compiler_version != "None"]
         - {{ cdt('libxext-devel') }}         # [linux]
         - {{ cdt('mesa-libgl-devel') }}      # [linux]
         - {{ cdt('mesa-dri-drivers') }}      # [linux]
@@ -142,13 +149,15 @@ outputs:
     build:
       skip: True  # [py2k]
       string: "py{{ py }}_{{processor}}_h{{ PKG_HASH }}_{{ build }}"
-      script: bash ${RECIPE_DIR}/build_pyprismatic.sh  # [not win]
+      script: bash ${RECIPE_DIR}/build_pyprismatic.sh gpu  # [linux64 and cuda_compiler_version != "None"]
+      script: bash ${RECIPE_DIR}/build_pyprismatic.sh  # [(linux64 and cuda_compiler_version == "None") or osx]
       script: {{ RECIPE_DIR }}\build_pyprismatic.bat  # [win]
 
     requirements:
       build:
-        - {{ compiler('c') }}                
-        - {{ compiler('cxx') }}              
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - {{ compiler('cuda') }}  # [linux64 and cuda_compiler_version != "None"]
         - {{ cdt('libxext-devel') }}         # [linux]
         - {{ cdt('mesa-libgl-devel') }}      # [linux]
         - {{ cdt('mesa-dri-drivers') }}      # [linux]
@@ -177,8 +186,9 @@ outputs:
 
     test:
       commands:
-        - python -c "import pyprismatic; pyprismatic.demo()"
-
+        - python -c "import pyprismatic"  # [linux64 and cuda_compiler_version != "None"]
+        - python -c "import pyprismatic; pyprismatic.demo()"  # [(linux64 and cuda_compiler_version == "None") or not linux64]
+        
 about:
   home: http://prism-em.com/
   license: GPL-3.0-only
