@@ -5,7 +5,7 @@ Home: http://prism-em.com/
 
 Package license: GPL-3.0-only
 
-Feedstock license: BSD 3-Clause
+Feedstock license: BSD-3-Clause
 
 Summary: CPU / GPU software for fast simulation of Scanning Transmission Electron Microscopy (STEM) experiments
 
