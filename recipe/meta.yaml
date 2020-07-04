@@ -148,7 +148,7 @@ outputs:
   - name: pyprismatic
     build:
       skip: True  # [py2k]
-      string: "py{{ py }}_{{ processor }}_h{{ PKG_HASH }}_{{ build }}"
+      string: "{{ processor }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}"
       script: bash ${RECIPE_DIR}/build_pyprismatic.sh gpu  # [linux64 and cuda_compiler_version != "None"]
       script: bash ${RECIPE_DIR}/build_pyprismatic.sh  # [(linux64 and cuda_compiler_version == "None") or osx]
       script: {{ RECIPE_DIR }}\build_pyprismatic.bat  # [win]
