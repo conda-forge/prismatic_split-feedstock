@@ -4,6 +4,9 @@
 {% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [linux64]
 {% set processor = "cpu" %}  # [not linux64]
 
+# Prioritize gpu build if cudatoolkit can be installed (through __cuda virtual package)
+{% set build = build + 100 if processor == "gpu" else build %}  # [linux64]
+
 package:
   name: prismatic_split
   version: {{ version }}
@@ -188,7 +191,7 @@ outputs:
       commands:
         - python -c "import pyprismatic"  # [linux64 and cuda_compiler_version != "None"]
         - python -c "import pyprismatic; pyprismatic.demo()"  # [(linux64 and cuda_compiler_version == "None") or not linux64]
-        
+
 about:
   home: http://prism-em.com/
   license: GPL-3.0-only
