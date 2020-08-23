@@ -1,19 +1,31 @@
+MACOSX_DEPLOYMENT_TARGET:
+- '10.9'
 boost:
 - '1.72'
 boost_cpp:
 - '1.72'
 c_compiler:
-- vs2017
+- clang
+c_compiler_version:
+- '10'
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
+cuda_compiler_version:
+- None
 cxx_compiler:
-- vs2017
+- clangxx
+cxx_compiler_version:
+- '10'
 fftw:
 - '3'
 hdf5:
 - 1.10.6
+macos_machine:
+- x86_64-apple-darwin13.4.0
+macos_min_version:
+- '10.9'
 pin_run_as_build:
   boost:
     max_pin: x.x.x
@@ -32,3 +44,5 @@ python:
 - 3.8.* *_cpython
 qt:
 - '5.12'
+target_platform:
+- osx-64

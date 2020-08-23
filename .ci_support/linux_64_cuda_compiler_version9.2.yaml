@@ -42,6 +42,8 @@ python:
 - 3.8.* *_cpython
 qt:
 - '5.12'
+target_platform:
+- linux-64
 zip_keys:
 - - cuda_compiler_version
   - docker_image
