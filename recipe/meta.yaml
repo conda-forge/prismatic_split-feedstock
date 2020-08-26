@@ -1,8 +1,11 @@
 {% set version = "1.2.1" %}
-{% set build = 7 %}
+{% set build = 8 %}
 
 {% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [linux64]
 {% set processor = "cpu" %}  # [not linux64]
+
+# Prioritize gpu build if cudatoolkit can be installed (through __cuda virtual package)
+{% set build = build + 100 if processor == "gpu" else build %}  # [linux64]
 
 package:
   name: prismatic_split
@@ -55,12 +58,11 @@ outputs:
 
     test:
       commands:
-        - command -v prismatic-gui  # [linux]
+        - command -v prismatic-gui  # [linux64 and cuda_compiler_version == "None"]
         - test -f $PREFIX/Applications/prismatic-gui.app/Contents/MacOS/prismatic-gui  # [osx]
         - where prismatic-gui  # [win]
         - where prismatic  # [win]
         - python -c "import pyprismatic; pyprismatic.demo()"  # [(linux64 and cuda_compiler_version == "None") or not linux64]
-        - python -c "import pyprismatic"  # [linux64 and cuda_compiler_version != "None"]
 
   - name: prismatic_cli
     build:
@@ -91,6 +93,7 @@ outputs:
       run:
         - hdf5
         - fftw
+        - __cuda  # [linux64 and cuda_compiler_version != "None"]
       ignore_run_exports:
         - boost-cpp
 
@@ -100,8 +103,6 @@ outputs:
       commands:
         - prismatic -i SI100.XYZ  # [(linux64 and cuda_compiler_version == "None") or not linux64]
         - prismatic-double -i SI100.XYZ  # [(linux64 and cuda_compiler_version == "None") or not linux64]
-        - test $PREFIX/bin/prismatic  # [linux64 and cuda_compiler_version != "None"]
-        - test $PREFIX/bin/prismatic-double  # [linux64 and cuda_compiler_version != "None"]
 
   - name: prismatic_gui
     build:
@@ -134,12 +135,13 @@ outputs:
         - hdf5
         - fftw
         - qt
+        - __cuda  # [linux64 and cuda_compiler_version != "None"]
       ignore_run_exports:
         - boost-cpp
 
     test:
       commands:
-        - command -v prismatic-gui  # [linux]
+        - command -v prismatic-gui  # [linux64 and cuda_compiler_version == "None"]
         - test -f $PREFIX/Applications/prismatic-gui.app/Contents/MacOS/prismatic-gui  # [osx]
         - where prismatic-gui  # [win]
         - if not exist %PREFIX%\\Menu\\prismatic_gui.json exit 1  # [win]
@@ -181,14 +183,14 @@ outputs:
         - numpy
         - fftw
         - h5py
+        - __cuda  # [linux64 and cuda_compiler_version != "None"]
       ignore_run_exports:
         - boost
 
     test:
       commands:
-        - python -c "import pyprismatic"  # [linux64 and cuda_compiler_version != "None"]
         - python -c "import pyprismatic; pyprismatic.demo()"  # [(linux64 and cuda_compiler_version == "None") or not linux64]
-        
+
 about:
   home: http://prism-em.com/
   license: GPL-3.0-only
