@@ -1,7 +1,8 @@
 boost:
-- '1.72'
+- 1.72.0
+- 1.74.0
 boost_cpp:
-- '1.72'
+- 1.74.0
 c_compiler:
 - vs2017
 channel_sources:

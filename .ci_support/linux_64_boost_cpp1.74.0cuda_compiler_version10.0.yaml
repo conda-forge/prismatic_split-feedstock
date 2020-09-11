@@ -1,31 +1,30 @@
-MACOSX_DEPLOYMENT_TARGET:
-- '10.9'
 boost:
-- '1.72'
+- 1.72.0
+- 1.74.0
 boost_cpp:
-- '1.72'
+- 1.74.0
 c_compiler:
-- clang
+- gcc
 c_compiler_version:
-- '10'
+- '7'
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
+cuda_compiler:
+- nvcc
 cuda_compiler_version:
-- None
+- '10.0'
 cxx_compiler:
-- clangxx
+- gxx
 cxx_compiler_version:
-- '10'
+- '7'
+docker_image:
+- condaforge/linux-anvil-cuda:10.0
 fftw:
 - '3'
 hdf5:
 - 1.10.6
-macos_machine:
-- x86_64-apple-darwin13.4.0
-macos_min_version:
-- '10.9'
 pin_run_as_build:
   boost:
     max_pin: x.x.x
@@ -45,4 +44,7 @@ python:
 qt:
 - '5.12'
 target_platform:
-- osx-64
+- linux-64
+zip_keys:
+- - cuda_compiler_version
+  - docker_image
