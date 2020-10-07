@@ -2,7 +2,6 @@ MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
 boost:
 - 1.72.0
-- 1.74.0
 boost_cpp:
 - 1.72.0
 c_compiler:
@@ -45,3 +44,6 @@ qt:
 - '5.12'
 target_platform:
 - osx-64
+zip_keys:
+- - boost
+  - boost_cpp

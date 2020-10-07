@@ -1,6 +1,5 @@
 boost:
 - 1.72.0
-- 1.74.0
 boost_cpp:
 - 1.72.0
 c_compiler:
@@ -37,3 +36,6 @@ qt:
 - '5.12'
 target_platform:
 - win-64
+zip_keys:
+- - boost
+  - boost_cpp
