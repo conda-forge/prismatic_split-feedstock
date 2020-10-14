@@ -1,5 +1,5 @@
 {% set version = "1.2.1" %}
-{% set build = 9 %}
+{% set build = 10 %}
 
 {% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [linux64]
 {% set processor = "cpu" %}  # [not linux64]
