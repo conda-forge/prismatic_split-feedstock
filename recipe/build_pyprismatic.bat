@@ -3,7 +3,8 @@
 set "CXXFLAGS= -MD"
 set "CMAKE_GENERATOR=NMake Makefiles"
 
-set CUDA_HOME=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v%cuda_compiler_version%
+set "CUDA_HOME=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v%cuda_compiler_version%"
+set "CUDA_HOME=%CUDA_HOME:\=/%"
 
 if "%cuda_compiler_version%" == "None" (
 	%PYTHON% setup.py build_ext ^

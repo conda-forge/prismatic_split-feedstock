@@ -8,7 +8,8 @@ if "%cuda_compiler_version%" == "None" (set gpu=0) else (set gpu=1)
 
 echo cli is %cli%, gui is %gui% and gpu is %gpu%
 
-set CUDA_HOME=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v%cuda_compiler_version%
+set "CUDA_HOME=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v%cuda_compiler_version%"
+set "CUDA_HOME=%CUDA_HOME:\=/%"
 
 echo CUDA_HOME is %CUDA_HOME%
 
