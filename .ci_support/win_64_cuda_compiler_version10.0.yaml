@@ -1,7 +1,7 @@
 boost:
-- 1.74.0
+- 1.72.0
 boost_cpp:
-- 1.74.0
+- 1.72.0
 c_compiler:
 - vs2017
 channel_sources:
@@ -11,7 +11,7 @@ channel_targets:
 cuda_compiler:
 - nvcc
 cuda_compiler_version:
-- '10.2'
+- '10.0'
 cxx_compiler:
 - vs2017
 fftw:
@@ -39,6 +39,3 @@ qt:
 - '5.12'
 target_platform:
 - win-64
-zip_keys:
-- - boost
-  - boost_cpp
