@@ -8,12 +8,9 @@ if "%cuda_compiler_version%" == "None" (set gpu=0) else (set gpu=1)
 
 echo cli is %cli%, gui is %gui% and gpu is %gpu%
 
+set CUDA_HOME=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v%cuda_compiler_version%
+
 echo CUDA_HOME is %CUDA_HOME%
-echo CUDA_PATH is %CUDA_PATH%
-
-set "CUDA_TOOLKIT_ROOT_DIR=%CUDA_HOME%"
-
-echo CUDA_TOOLKIT_ROOT_DIR is %CUDA_TOOLKIT_ROOT_DIR%
 
 set MENU_DIR=%PREFIX%\Menu
 if not exist %MENU_DIR% mkdir %MENU_DIR%
@@ -37,7 +34,7 @@ cmake -G "NMake Makefiles" ^
       -D Qt5Widgets_DIR=%LIBRARY_PREFIX%\lib\cmake\Qt5Widgets ^
       -D CMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
       -D CMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
-   	  -D CUDA_TOOLKIT_ROOT_DIR=%CUDA_PATH% ^
+   	  -D CUDA_TOOLKIT_ROOT_DIR=%CUDA_HOME% ^
       -D CMAKE_BUILD_TYPE=Release ^
       %SRC_DIR%
 if errorlevel 1 exit 1
@@ -65,7 +62,7 @@ cmake -G "NMake Makefiles" ^
       -D OUTPUT_NAME="prismatic-double" ^
       -D CMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
       -D CMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
-   	  -D CUDA_TOOLKIT_ROOT_DIR=%CUDA_PATH% ^
+   	  -D CUDA_TOOLKIT_ROOT_DIR=%CUDA_HOME% ^
       -D CMAKE_BUILD_TYPE=Release ^
       %SRC_DIR%
 if errorlevel 1 exit 1
