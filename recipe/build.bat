@@ -37,7 +37,7 @@ cmake -G "NMake Makefiles" ^
       -D Qt5Widgets_DIR=%LIBRARY_PREFIX%\lib\cmake\Qt5Widgets ^
       -D CMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
       -D CMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
-   	  -D CUDA_TOOLKIT_ROOT_DIR=%CUDA_TOOLKIT_ROOT_DIR% ^
+   	  -D CUDA_TOOLKIT_ROOT_DIR=%CUDA_PATH% ^
       -D CMAKE_BUILD_TYPE=Release ^
       %SRC_DIR%
 if errorlevel 1 exit 1
@@ -65,7 +65,7 @@ cmake -G "NMake Makefiles" ^
       -D OUTPUT_NAME="prismatic-double" ^
       -D CMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
       -D CMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
-   	  -D CUDA_TOOLKIT_ROOT_DIR=%CUDA_TOOLKIT_ROOT_DIR% ^
+   	  -D CUDA_TOOLKIT_ROOT_DIR=%CUDA_PATH% ^
       -D CMAKE_BUILD_TYPE=Release ^
       %SRC_DIR%
 if errorlevel 1 exit 1
