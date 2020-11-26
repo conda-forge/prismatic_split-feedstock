@@ -61,8 +61,8 @@ outputs:
       commands:
         - command -v prismatic-gui  # [linux64 and cuda_compiler_version == "None"]
         - test -f $PREFIX/Applications/prismatic-gui.app/Contents/MacOS/prismatic-gui  # [osx]
-        - where prismatic-gui  # [win]
-        - where prismatic  # [win]
+        - where prismatic-gui  # [win and cuda_compiler_version == "None"]
+        - where prismatic  # [win and cuda_compiler_version == "None"]
         - python -c "import pyprismatic; pyprismatic.demo()"  # [not osx and cuda_compiler_version == "None"]
 
   - name: prismatic_cli
@@ -144,9 +144,9 @@ outputs:
       commands:
         - command -v prismatic-gui  # [linux64 and cuda_compiler_version == "None"]
         - test -f $PREFIX/Applications/prismatic-gui.app/Contents/MacOS/prismatic-gui  # [osx]
-        - where prismatic-gui  # [win]
-        - if not exist %PREFIX%\\Menu\\prismatic_gui.json exit 1  # [win]
-        - if not exist %PREFIX%\\Menu\\prismatic.ico exit 1  # [win]
+        - where prismatic-gui  # [win and cuda_compiler_version == "None"]
+        - if not exist %PREFIX%\\Menu\\prismatic_gui.json exit 1  # [win and cuda_compiler_version == "None"]
+        - if not exist %PREFIX%\\Menu\\prismatic.ico exit 1  # [win and cuda_compiler_version == "None"]
 
   - name: pyprismatic
     build:
@@ -190,7 +190,6 @@ outputs:
 
     test:
       commands:
-        - python -c "import pyprismatic"  # [not osx and cuda_compiler_version != "None"]
         - python -c "import pyprismatic; pyprismatic.demo()"  # [(not osx and cuda_compiler_version == "None") or osx]
 
 about:
