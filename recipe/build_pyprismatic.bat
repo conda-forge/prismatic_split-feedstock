@@ -3,8 +3,12 @@
 set "CXXFLAGS= -MD"
 set "CMAKE_GENERATOR=NMake Makefiles"
 
-set "CUDA_HOME=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v%cuda_compiler_version%"
-set "CUDA_HOME=%CUDA_HOME:\=/%"
+echo CUDA_HOME: %CUDA_HOME%
+echo CUDA_PATH: %CUDA_PATH%
+
+set "CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v%cuda_compiler_version%"
+
+echo CUDA_PATH (after): %CUDA_PATH%
 
 if "%cuda_compiler_version%" == "None" (
 	%PYTHON% setup.py build_ext ^
@@ -17,7 +21,6 @@ if "%cuda_compiler_version%" == "None" (
 			-DHDF5_DIR=%LIBRARY_PREFIX%\cmake\hdf5 ^
 			-DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
 			-DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
-			-DCUDA_TOOLKIT_ROOT_DIR=%CUDA_HOME% ^
 			install  --enable-gpu
 	if errorlevel 1 exit 1
 )
