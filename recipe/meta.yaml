@@ -1,11 +1,11 @@
 {% set version = "1.2.1" %}
-{% set build = 11 %}
+{% set build = 12 %}
 
-{% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [linux64]
-{% set processor = "cpu" %}  # [not linux64]
+{% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [not osx]
+{% set processor = "cpu" %}  # [osx]
 
 # Prioritize gpu build if cudatoolkit can be installed (through __cuda virtual package)
-{% set build = build + 100 if processor == "gpu" else build %}  # [linux64]
+{% set build = build + 100 if processor == "gpu" else build %}
 
 package:
   name: prismatic_split
@@ -29,7 +29,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - {{ compiler('cuda') }}  # [linux64 and cuda_compiler_version != "None"]
+    - {{ compiler('cuda') }}  # [not osx and cuda_compiler_version != "None"]
     - {{ cdt('libxext-devel') }}         # [linux]
     - {{ cdt('mesa-libgl-devel') }}      # [linux]
     - {{ cdt('mesa-dri-drivers') }}      # [linux]
@@ -61,9 +61,9 @@ outputs:
       commands:
         - command -v prismatic-gui  # [linux64 and cuda_compiler_version == "None"]
         - test -f $PREFIX/Applications/prismatic-gui.app/Contents/MacOS/prismatic-gui  # [osx]
-        - where prismatic-gui  # [win]
-        - where prismatic  # [win]
-        - python -c "import pyprismatic; pyprismatic.demo()"  # [(linux64 and cuda_compiler_version == "None") or not linux64]
+        - where prismatic-gui  # [win and cuda_compiler_version == "None"]
+        - where prismatic  # [win and cuda_compiler_version == "None"]
+        - python -c "import pyprismatic; pyprismatic.demo()"  # [not osx and cuda_compiler_version == "None"]
 
   - name: prismatic_cli
     build:
@@ -75,7 +75,7 @@ outputs:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-        - {{ compiler('cuda') }}  # [linux64 and cuda_compiler_version != "None"]
+        - {{ compiler('cuda') }}  # [not osx and cuda_compiler_version != "None"]
         - {{ cdt('libxext-devel') }}         # [linux]
         - {{ cdt('mesa-libgl-devel') }}      # [linux]
         - {{ cdt('mesa-dri-drivers') }}      # [linux]
@@ -94,7 +94,7 @@ outputs:
       run:
         - hdf5
         - fftw
-        - __cuda  # [linux64 and cuda_compiler_version != "None"]
+        - __cuda  # [not osx and cuda_compiler_version != "None"]
       ignore_run_exports:
         - boost-cpp
 
@@ -102,8 +102,8 @@ outputs:
       source_files:
         - SI100.XYZ
       commands:
-        - prismatic -i SI100.XYZ  # [(linux64 and cuda_compiler_version == "None") or not linux64]
-        - prismatic-double -i SI100.XYZ  # [(linux64 and cuda_compiler_version == "None") or not linux64]
+        - prismatic -i SI100.XYZ  # [(not osx and cuda_compiler_version == "None") or osx]
+        - prismatic-double -i SI100.XYZ  # [(not osx and cuda_compiler_version == "None") or osx]
 
   - name: prismatic_gui
     build:
@@ -115,7 +115,7 @@ outputs:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-        - {{ compiler('cuda') }}  # [linux64 and cuda_compiler_version != "None"]
+        - {{ compiler('cuda') }}  # [not osx and cuda_compiler_version != "None"]
         - {{ cdt('libxext-devel') }}         # [linux]
         - {{ cdt('mesa-libgl-devel') }}      # [linux]
         - {{ cdt('mesa-dri-drivers') }}      # [linux]
@@ -136,7 +136,7 @@ outputs:
         - hdf5
         - fftw
         - qt
-        - __cuda  # [linux64 and cuda_compiler_version != "None"]
+        - __cuda  # [not osx and cuda_compiler_version != "None"]
       ignore_run_exports:
         - boost-cpp
 
@@ -144,9 +144,9 @@ outputs:
       commands:
         - command -v prismatic-gui  # [linux64 and cuda_compiler_version == "None"]
         - test -f $PREFIX/Applications/prismatic-gui.app/Contents/MacOS/prismatic-gui  # [osx]
-        - where prismatic-gui  # [win]
-        - if not exist %PREFIX%\\Menu\\prismatic_gui.json exit 1  # [win]
-        - if not exist %PREFIX%\\Menu\\prismatic.ico exit 1  # [win]
+        - where prismatic-gui  # [win and cuda_compiler_version == "None"]
+        - if not exist %PREFIX%\\Menu\\prismatic_gui.json exit 1  # [win and cuda_compiler_version == "None"]
+        - if not exist %PREFIX%\\Menu\\prismatic.ico exit 1  # [win and cuda_compiler_version == "None"]
 
   - name: pyprismatic
     build:
@@ -160,7 +160,7 @@ outputs:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-        - {{ compiler('cuda') }}  # [linux64 and cuda_compiler_version != "None"]
+        - {{ compiler('cuda') }}  # [not osx and cuda_compiler_version != "None"]
         - {{ cdt('libxext-devel') }}         # [linux]
         - {{ cdt('mesa-libgl-devel') }}      # [linux]
         - {{ cdt('mesa-dri-drivers') }}      # [linux]
@@ -184,13 +184,13 @@ outputs:
         - numpy
         - fftw
         - h5py
-        - __cuda  # [linux64 and cuda_compiler_version != "None"]
+        - __cuda  # [not osx and cuda_compiler_version != "None"]
       ignore_run_exports:
         - boost
 
     test:
       commands:
-        - python -c "import pyprismatic; pyprismatic.demo()"  # [(linux64 and cuda_compiler_version == "None") or not linux64]
+        - python -c "import pyprismatic; pyprismatic.demo()"  # [(not osx and cuda_compiler_version == "None") or osx]
 
 about:
   home: http://prism-em.com/

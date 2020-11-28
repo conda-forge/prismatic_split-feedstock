@@ -4,7 +4,16 @@ if "%1"=="cli" (set cli=1 && set build=build_cli) else (set cli=0)
 
 if "%1"=="gui" (set gui=1 && set build=build_gui) else (set gui=0)
 
-echo cli is %cli% and gui is %gui%
+if "%cuda_compiler_version%" == "None" (set gpu=0) else (set gpu=1)
+
+echo cli is %cli%, gui is %gui% and gpu is %gpu%
+
+echo CUDA_HOME: %CUDA_HOME%
+echo CUDA_PATH: %CUDA_PATH%
+
+set "CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v%cuda_compiler_version%"
+
+echo CUDA_PATH (after): %CUDA_PATH%
 
 set MENU_DIR=%PREFIX%\Menu
 if not exist %MENU_DIR% mkdir %MENU_DIR%
@@ -21,8 +30,8 @@ mkdir %build% && cd %build%
 cmake -G "NMake Makefiles" ^
       -D PRISMATIC_ENABLE_CLI=%cli% ^
       -D PRISMATIC_ENABLE_GUI=%gui% ^
-	  -D PRISMATIC_ENABLE_PYPRISMATIC=0 ^
-      -D PRISMATIC_ENABLE_GPU=0 ^
+      -D PRISMATIC_ENABLE_PYPRISMATIC=0 ^
+      -D PRISMATIC_ENABLE_GPU=%gpu% ^
       -D PRISMATIC_ENABLE_DOUBLE_PRECISION=0 ^
       -D HDF5_DIR=%LIBRARY_PREFIX%\cmake\hdf5 ^
       -D Qt5Widgets_DIR=%LIBRARY_PREFIX%\lib\cmake\Qt5Widgets ^
@@ -48,7 +57,7 @@ cd .. && mkdir build_double && cd build_double
 cmake -G "NMake Makefiles" ^
       -D PRISMATIC_ENABLE_CLI=%cli% ^
       -D PRISMATIC_ENABLE_GUI=%gui% ^
-      -D PRISMATIC_ENABLE_GPU=0 ^
+      -D PRISMATIC_ENABLE_GPU=%gpu% ^
       -D PRISMATIC_ENABLE_DOUBLE_PRECISION=1 ^
       -D HDF5_DIR=%LIBRARY_PREFIX%\cmake\hdf5 ^
       -D Qt5Widgets_DIR=%LIBRARY_PREFIX%\lib\cmake\Qt5Widgets ^
