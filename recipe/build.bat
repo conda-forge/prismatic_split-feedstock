@@ -11,10 +11,6 @@ echo cli is %cli%, gui is %gui% and gpu is %gpu%
 echo CUDA_HOME: %CUDA_HOME%
 echo CUDA_PATH: %CUDA_PATH%
 
-set "CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v%cuda_compiler_version%"
-
-echo CUDA_PATH (after): %CUDA_PATH%
-
 set MENU_DIR=%PREFIX%\Menu
 if not exist %MENU_DIR% mkdir %MENU_DIR%
 
