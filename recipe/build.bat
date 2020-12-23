@@ -10,6 +10,11 @@ echo cli is %cli%, gui is %gui% and gpu is %gpu%
 
 echo CUDA_HOME: %CUDA_HOME%
 echo CUDA_PATH: %CUDA_PATH%
+echo INCLUDE: %INCLUDE%
+
+echo CXXFLAGS (before): %CXXFLAGS% 
+set "CXXFLAGS="
+echo CXXFLAGS (after): %CXXFLAGS% 
 
 set MENU_DIR=%PREFIX%\Menu
 if not exist %MENU_DIR% mkdir %MENU_DIR%
