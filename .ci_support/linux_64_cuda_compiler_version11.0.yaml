@@ -1,11 +1,11 @@
 boost:
-- 1.72.0
+- 1.74.0
 boost_cpp:
-- 1.72.0
+- 1.74.0
 c_compiler:
 - gcc
 c_compiler_version:
-- '9'
+- '7'
 cdt_name:
 - cos7
 channel_sources:
@@ -19,7 +19,7 @@ cuda_compiler_version:
 cxx_compiler:
 - gxx
 cxx_compiler_version:
-- '9'
+- '7'
 docker_image:
 - quay.io/condaforge/linux-anvil-cuda:11.0
 fftw:
@@ -39,6 +39,7 @@ pin_run_as_build:
   qt:
     max_pin: x.x
 python:
+- 3.6.* *_73_pypy
 - 3.6.* *_cpython
 - 3.7.* *_cpython
 - 3.8.* *_cpython
@@ -50,6 +51,6 @@ target_platform:
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
-- - cuda_compiler_version
+- - cdt_name
+  - cuda_compiler_version
   - docker_image
-  - cdt_name
