@@ -7,7 +7,7 @@ c_compiler:
 c_compiler_version:
 - '7'
 cdt_name:
-- cos7
+- cos6
 channel_sources:
 - conda-forge,defaults
 channel_targets:
@@ -39,6 +39,7 @@ pin_run_as_build:
   qt:
     max_pin: x.x
 python:
+- 3.6.* *_73_pypy
 - 3.6.* *_cpython
 - 3.7.* *_cpython
 - 3.8.* *_cpython
