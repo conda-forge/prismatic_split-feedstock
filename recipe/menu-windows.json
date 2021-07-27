@@ -1,5 +1,5 @@
 {
-    "menu_name": "Anaconda${PY_VER} ${PLATFORM}",
+    "menu_name": "${DISTRIBUTION_NAME}",
     "menu_items":
     [
         {
