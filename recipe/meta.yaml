@@ -176,10 +176,11 @@ outputs:
         - fftw
         - h5py
       run:
-        - python
-        - numpy
         - fftw
         - h5py
+        - numpy
+        - python
+        - scipy
         - __cuda  # [not osx and cuda_compiler_version != "None"]
       ignore_run_exports:
         - boost
