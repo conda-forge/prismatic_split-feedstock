@@ -1,5 +1,6 @@
-{% set version = "1.2.1" %}
-{% set build = 14 %}
+{% set processor = "cpu" %}
+{% set version = "2.0" %}
+{% set build = 0 %}
 
 {% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [not osx]
 {% set processor = "cpu" %}  # [osx]
@@ -12,10 +13,10 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/prism-em/prismatic/archive/{{ version }}.tar.gz
-  sha256: 844f659575dd98999b7c4864e850a7ec735f297ab1fb6c2d2be91d7f9720fe70
+  url: https://github.com/prism-em/prismatic/archive/v{{ version }}.tar.gz
+  sha256: a568878462996160869456f2fcc721e1722322a4192e3dd9c6d80af2245072e7
   patches:
-    - 0001-Set-nvcc-arch-flag-to-sm_60.patch 
+    - 0001-Set-nvcc-arch-flag-to-sm_60.patch
     - 0001-fix_pyprismatic_macos.patch  # [osx]
     - 0001-fftw_cmake.patch
     - 0002-Set-output-name-for-cmake.patch  # [not osx]
@@ -47,8 +48,8 @@ outputs:
   - name: prismatic
     build:
       number: {{ build }}
-      skip: True  # [py2k]
-      string: "{{ processor }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}"
+      skip: true  # [py2k]
+      string: {{ processor }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}
     requirements:
       host:
         - python
@@ -67,7 +68,7 @@ outputs:
 
   - name: prismatic_cli
     build:
-      string: "{{ processor }}_h{{ PKG_HASH }}_{{ build }}"
+      string: {{ processor }}_h{{ PKG_HASH }}_{{ build }}
       script: bash ${RECIPE_DIR}/combined_build_install.sh cli  # [not win]
       script: {{ RECIPE_DIR }}\build.bat cli  # [win]
 
@@ -107,7 +108,7 @@ outputs:
 
   - name: prismatic_gui
     build:
-      string: "{{ processor }}_h{{ PKG_HASH }}_{{ build }}"
+      string: {{ processor }}_h{{ PKG_HASH }}_{{ build }}
       script: bash ${RECIPE_DIR}/combined_build_install.sh gui  # [not win]
       script: {{ RECIPE_DIR }}\build.bat gui  # [win]
 
@@ -152,8 +153,8 @@ outputs:
 
   - name: pyprismatic
     build:
-      skip: True  # [py2k]
-      string: "{{ processor }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}"
+      skip: true  # [py2k]
+      string: {{ processor }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}
       script: bash ${RECIPE_DIR}/build_pyprismatic.sh gpu  # [linux64 and cuda_compiler_version != "None"]
       script: bash ${RECIPE_DIR}/build_pyprismatic.sh  # [(linux64 and cuda_compiler_version == "None") or osx]
       script: {{ RECIPE_DIR }}\build_pyprismatic.bat  # [win]
@@ -198,7 +199,7 @@ about:
   home: http://prism-em.com/
   license: GPL-3.0-only
   license_file: LICENSE
-  summary: 'CPU / GPU software for fast simulation of Scanning Transmission Electron Microscopy (STEM) experiments'
+  summary: CPU / GPU software for fast simulation of Scanning Transmission Electron Microscopy (STEM) experiments
   description: |
     CPU / GPU software for fast simulation of Scanning Transmission Electron Microscopy (STEM) experiments
   dev_url: https://github.com/prism-em/prismatic
