@@ -7,7 +7,7 @@ boost_cpp:
 c_compiler:
 - clang
 c_compiler_version:
-- '11'
+- '13'
 channel_sources:
 - conda-forge
 channel_targets:
@@ -17,7 +17,7 @@ cuda_compiler_version:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '11'
+- '13'
 fftw:
 - '3'
 hdf5:
@@ -34,15 +34,13 @@ pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
-  qt:
-    max_pin: x.x
 python:
 - 3.10.* *_cpython
 - 3.7.* *_cpython
 - 3.8.* *_cpython
 - 3.9.* *_cpython
-qt:
-- '5.12'
+qt_main:
+- '5.15'
 target_platform:
 - osx-64
 zip_keys:
