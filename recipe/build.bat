@@ -11,6 +11,10 @@ echo cli is %cli%, gui is %gui% and gpu is %gpu%
 echo CUDA_HOME: %CUDA_HOME%
 echo CUDA_PATH: %CUDA_PATH%
 
+# unset option that ninja complains about
+set "CMAKE_GENERATOR_TOOLSET="
+set "CMAKE_GENERATOR_PLATFORM="
+
 set "CUDA_PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v%cuda_compiler_version%"
 
 echo CUDA_PATH (after): %CUDA_PATH%
