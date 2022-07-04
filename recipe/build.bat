@@ -27,7 +27,7 @@ if %gui%==1 (
 mkdir %build% && cd %build%
 
 :: Configure using the CMakeFiles
-cmake -G "NMake Makefiles" ^
+cmake -G "Ninja" ^
       -D PRISMATIC_ENABLE_CLI=%cli% ^
       -D PRISMATIC_ENABLE_GUI=%gui% ^
       -D PRISMATIC_ENABLE_PYPRISMATIC=0 ^
@@ -42,11 +42,11 @@ cmake -G "NMake Makefiles" ^
 if errorlevel 1 exit 1
 
 :: Build!
-nmake
+ninja -j %CPU_COUNT%
 if errorlevel 1 exit 1
 
 :: Install!
-nmake install
+ninja install
 if errorlevel 1 exit 1
 
 :: exit when don't build with double precision (only for cli)
@@ -54,7 +54,7 @@ if not %cli% == 1 exit 0
 
 cd .. && mkdir build_double && cd build_double
 
-cmake -G "NMake Makefiles" ^
+cmake -G "Ninja" ^
       -D PRISMATIC_ENABLE_CLI=%cli% ^
       -D PRISMATIC_ENABLE_GUI=%gui% ^
       -D PRISMATIC_ENABLE_GPU=%gpu% ^
@@ -69,9 +69,9 @@ cmake -G "NMake Makefiles" ^
 if errorlevel 1 exit 1
 
 :: Build!
-nmake
+ninja -j %CPU_COUNT%
 if errorlevel 1 exit 1
 
 :: Install!
-nmake install
+ninja install
 if errorlevel 1 exit 1

@@ -1,7 +1,7 @@
 
 :: https://github.com/jkriege2/JKQtPlotter/issues/35
 set "CXXFLAGS= -MD"
-set "CMAKE_GENERATOR=NMake Makefiles"
+set "CMAKE_GENERATOR=Ninja"
 
 echo CUDA_HOME: %CUDA_HOME%
 echo CUDA_PATH: %CUDA_PATH%
