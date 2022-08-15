@@ -1,6 +1,6 @@
 {% set processor = "cpu" %}
 {% set version = "2.0" %}
-{% set build = 3 %}
+{% set build = 4 %}
 
 {% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [not osx]
 {% set processor = "cpu" %}  # [osx]
@@ -130,11 +130,11 @@ outputs:
         - boost-cpp
         - hdf5
         - fftw
-        - qt
+        - qt-main
       run:
         - hdf5
         - fftw
-        - qt
+        - qt-main
         - __cuda  # [not osx and cuda_compiler_version != "None"]
       run_constrained:
         - menuinst >=1.4.17
