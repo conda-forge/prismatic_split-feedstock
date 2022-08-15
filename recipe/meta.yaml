@@ -1,6 +1,6 @@
 {% set processor = "cpu" %}
 {% set version = "2.0" %}
-{% set build = 2 %}
+{% set build = 3 %}
 
 {% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [not osx]
 {% set processor = "cpu" %}  # [osx]
@@ -35,6 +35,7 @@ requirements:
     - {{ cdt('libxfixes') }}             # [linux]
     - {{ cdt('libxxf86vm') }}            # [linux]
     - make                               # [unix]
+    - ninja                              # [win]
     - cmake
     - pkg-config
 
@@ -81,6 +82,7 @@ outputs:
         - {{ cdt('libxfixes') }}             # [linux]
         - {{ cdt('libxxf86vm') }}            # [linux]
         - make                               # [unix]
+        - ninja                              # [win]
         - cmake
         - pkg-config
       host:
@@ -121,6 +123,7 @@ outputs:
         - {{ cdt('libxfixes') }}             # [linux]
         - {{ cdt('libxxf86vm') }}            # [linux]
         - make                               # [unix]
+        - ninja                              # [win]
         - cmake
         - pkg-config
       host:
@@ -168,6 +171,7 @@ outputs:
         - {{ cdt('libxfixes') }}             # [linux]
         - {{ cdt('libxxf86vm') }}            # [linux]
         - make                               # [unix]
+        - ninja                              # [win]
         - cmake
         - pkg-config
       host:
