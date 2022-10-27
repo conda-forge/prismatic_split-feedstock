@@ -244,6 +244,3 @@ Feedstock Maintainers
 * [@ericpre](https://github.com/ericpre/)
 * [@tschoonj](https://github.com/tschoonj/)
 
-
-<!-- dummy commit to enable rerendering -->
-
