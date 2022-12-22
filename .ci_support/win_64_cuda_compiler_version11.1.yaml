@@ -1,9 +1,9 @@
 boost:
-- 1.74.0
+- 1.78.0
 boost_cpp:
-- 1.74.0
+- 1.78.0
 c_compiler:
-- vs2017
+- vs2019
 channel_sources:
 - conda-forge
 channel_targets:
@@ -13,7 +13,7 @@ cuda_compiler:
 cuda_compiler_version:
 - '11.1'
 cxx_compiler:
-- vs2017
+- vs2019
 fftw:
 - '3'
 hdf5:
@@ -23,14 +23,11 @@ pin_run_as_build:
     max_pin: x.x.x
   boost-cpp:
     max_pin: x.x.x
-  fftw:
-    max_pin: x
   python:
     min_pin: x.x
     max_pin: x.x
 python:
 - 3.10.* *_cpython
-- 3.7.* *_cpython
 - 3.8.* *_cpython
 - 3.9.* *_cpython
 qt_main:
