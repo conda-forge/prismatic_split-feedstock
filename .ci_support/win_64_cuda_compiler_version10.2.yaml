@@ -3,7 +3,7 @@ boost:
 boost_cpp:
 - 1.78.0
 c_compiler:
-- vs2019
+- vs2022
 channel_sources:
 - conda-forge
 channel_targets:
@@ -13,7 +13,7 @@ cuda_compiler:
 cuda_compiler_version:
 - '10.2'
 cxx_compiler:
-- vs2019
+- vs2022
 fftw:
 - '3'
 hdf5:
