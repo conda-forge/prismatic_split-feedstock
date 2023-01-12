@@ -1,0 +1,25 @@
+From e1d24627f7481d7dc55b455a3d86e8a44f1a35e6 Mon Sep 17 00:00:00 2001
+From: Eric Prestat <eric.prestat@gmail.com>
+Date: Thu, 12 Jan 2023 16:07:07 +0000
+Subject: [PATCH] Workaround to compile using VS2022
+
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 55902009..f66f08ba 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -25,7 +25,7 @@ set(OUTPUT_NAME prismatic CACHE STRING OUTPUT_NAME)
+ 
+ #set (CMAKE_BUILD_TYPE DEBUG)
+ if (PRISMATIC_ENABLE_GPU)
+-    set(NVCC_FLAGS_EXTRA "-arch=sm_60 -std=c++11 -Xcompiler -fPIC")
++    set(NVCC_FLAGS_EXTRA "-arch=sm_60 -allow-unsupported-compiler -Xcompiler -fPIC")
+ endif (PRISMATIC_ENABLE_GPU)
+ set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
+ 
+-- 
+2.30.2
+

@@ -17,6 +17,7 @@ source:
   sha256: a568878462996160869456f2fcc721e1722322a4192e3dd9c6d80af2245072e7
   patches:
     - 0001-Fix-compilation-error-with-clang-macos-implicit-conv.patch
+    - 0002-Workaround-to-compile-using-VS2022.patch  # [win]
 
 build:
   number: {{ build }}
