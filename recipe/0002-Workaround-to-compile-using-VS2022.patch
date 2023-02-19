@@ -16,7 +16,7 @@ index 55902009..f66f08ba 100644
  #set (CMAKE_BUILD_TYPE DEBUG)
  if (PRISMATIC_ENABLE_GPU)
 -    set(NVCC_FLAGS_EXTRA "-arch=sm_60 -std=c++11 -Xcompiler -fPIC")
-+    set(NVCC_FLAGS_EXTRA "-arch=sm_60 -allow-unsupported-compiler -Xcompiler -fPIC")
++    set(NVCC_FLAGS_EXTRA "-arch=sm_60 -std=c++17 -allow-unsupported-compiler -Xcompiler -fPIC")
  endif (PRISMATIC_ENABLE_GPU)
  set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
  
