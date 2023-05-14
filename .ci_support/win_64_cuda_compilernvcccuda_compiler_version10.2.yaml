@@ -11,7 +11,7 @@ channel_targets:
 cuda_compiler:
 - nvcc
 cuda_compiler_version:
-- '11.0'
+- '10.2'
 cxx_compiler:
 - vs2022
 fftw:
@@ -34,3 +34,6 @@ qt_main:
 - '5.15'
 target_platform:
 - win-64
+zip_keys:
+- - cuda_compiler
+  - cuda_compiler_version
