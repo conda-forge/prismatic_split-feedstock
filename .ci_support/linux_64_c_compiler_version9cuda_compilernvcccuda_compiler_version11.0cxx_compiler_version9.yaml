@@ -1,7 +1,7 @@
 boost:
 - 1.78.0
 boost_cpp:
-- 1.74.0
+- 1.78.0
 c_compiler:
 - gcc
 c_compiler_version:
@@ -25,31 +25,27 @@ docker_image:
 fftw:
 - '3'
 hdf5:
-- 1.12.2
+- 1.14.0
 pin_run_as_build:
   boost:
     max_pin: x.x.x
   boost-cpp:
     max_pin: x.x.x
-  fftw:
-    max_pin: x
   python:
     min_pin: x.x
     max_pin: x.x
-  qt:
-    max_pin: x.x
 python:
 - 3.10.* *_cpython
-- 3.7.* *_cpython
 - 3.8.* *_cpython
 - 3.9.* *_cpython
 qt:
-- '5.12'
+- '5.15'
 target_platform:
 - linux-64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
+  - cuda_compiler
   - cuda_compiler_version
   - cdt_name
   - docker_image
