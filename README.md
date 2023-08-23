@@ -32,38 +32,17 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64_c_compiler_version10cuda_compilernvcccuda_compiler_version11.1cxx_compiler_version10</td>
+              <td>linux_64_c_compiler_version10cuda_compiler_version11.2cxx_compiler_version10</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8678&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/prismatic_split-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version10cuda_compilernvcccuda_compiler_version11.1cxx_compiler_version10" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/prismatic_split-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version10cuda_compiler_version11.2cxx_compiler_version10" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_c_compiler_version10cuda_compilernvcccuda_compiler_version11.2cxx_compiler_version10</td>
+              <td>linux_64_c_compiler_version12cuda_compiler_versionNonecxx_compiler_version12</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8678&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/prismatic_split-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version10cuda_compilernvcccuda_compiler_version11.2cxx_compiler_version10" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_c_compiler_version12cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version12</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8678&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/prismatic_split-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version12cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version12" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_c_compiler_version7cuda_compilernvcccuda_compiler_version10.2cxx_compiler_version7</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8678&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/prismatic_split-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version7cuda_compilernvcccuda_compiler_version10.2cxx_compiler_version7" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_c_compiler_version9cuda_compilernvcccuda_compiler_version11.0cxx_compiler_version9</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8678&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/prismatic_split-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version9cuda_compilernvcccuda_compiler_version11.0cxx_compiler_version9" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/prismatic_split-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version12cuda_compiler_versionNonecxx_compiler_version12" alt="variant">
                 </a>
               </td>
             </tr><tr>
