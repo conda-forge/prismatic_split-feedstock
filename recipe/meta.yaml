@@ -94,8 +94,6 @@ outputs:
         - hdf5
         - fftw
         - __cuda  # [not osx and cuda_compiler_version != "None"]
-      ignore_run_exports:
-        - libboost-headers
 
     test:
       source_files:
@@ -139,8 +137,6 @@ outputs:
         - __cuda  # [not osx and cuda_compiler_version != "None"]
       run_constrained:
         - menuinst >=1.4.17
-      ignore_run_exports:
-        - libboost-headers
 
     test:
       commands:
@@ -178,7 +174,7 @@ outputs:
       host:
         - setuptools
         - python
-        - libboost-python-devel
+        - libboost-headers
         - hdf5
         - fftw
         - h5py
@@ -189,8 +185,6 @@ outputs:
         - python
         - scipy
         - __cuda  # [not osx and cuda_compiler_version != "None"]
-      ignore_run_exports:
-        - libboost-python-devel
 
     test:
       commands:
