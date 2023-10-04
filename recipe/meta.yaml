@@ -1,6 +1,6 @@
 {% set processor = "cpu" %}
 {% set version = "2.0" %}
-{% set build = 7 %}
+{% set build = 8 %}
 
 {% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [not osx]
 {% set processor = "cpu" %}  # [osx]
@@ -87,15 +87,13 @@ outputs:
         - cmake
         - pkg-config
       host:
-        - boost-cpp
+        - libboost-headers
         - hdf5
         - fftw
       run:
         - hdf5
         - fftw
         - __cuda  # [not osx and cuda_compiler_version != "None"]
-      ignore_run_exports:
-        - boost-cpp
 
     test:
       source_files:
@@ -128,19 +126,16 @@ outputs:
         - cmake
         - pkg-config
       host:
-        - boost-cpp
+        - libboost-headers
         - hdf5
         - fftw
-        - qt
+        - qt-main
       run:
         - hdf5
         - fftw
-        - qt
         - __cuda  # [not osx and cuda_compiler_version != "None"]
       run_constrained:
         - menuinst >=1.4.17
-      ignore_run_exports:
-        - boost-cpp
 
     test:
       commands:
@@ -178,7 +173,7 @@ outputs:
       host:
         - setuptools
         - python
-        - boost
+        - libboost-headers
         - hdf5
         - fftw
         - h5py
@@ -189,8 +184,6 @@ outputs:
         - python
         - scipy
         - __cuda  # [not osx and cuda_compiler_version != "None"]
-      ignore_run_exports:
-        - boost
 
     test:
       commands:
