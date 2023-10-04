@@ -129,11 +129,10 @@ outputs:
         - libboost-headers
         - hdf5
         - fftw
-        - qt
+        - qt-main
       run:
         - hdf5
         - fftw
-        - qt
         - __cuda  # [not osx and cuda_compiler_version != "None"]
       run_constrained:
         - menuinst >=1.4.17
