@@ -22,8 +22,6 @@ fftw:
 - '3'
 hdf5:
 - 1.14.2
-libboost_python_devel:
-- '1.82'
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -31,9 +29,10 @@ pin_run_as_build:
 python:
 - 3.10.* *_cpython
 - 3.11.* *_cpython
+- 3.12.* *_cpython
 - 3.8.* *_cpython
 - 3.9.* *_cpython
-qt:
+qt_main:
 - '5.15'
 target_platform:
 - linux-64
