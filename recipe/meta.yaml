@@ -1,6 +1,6 @@
 {% set processor = "cpu" %}
 {% set version = "2.0" %}
-{% set build = 10 %}
+{% set build = 11 %}
 
 {% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [not osx]
 {% set processor = "cpu" %}  # [osx]
@@ -25,6 +25,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
     - {{ compiler('cuda') }}  # [not osx and cuda_compiler_version != "None"]
     - {{ cdt('libxext-devel') }}         # [linux]
@@ -72,6 +73,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('c') }}
+        - {{ stdlib("c") }}
         - {{ compiler('cxx') }}
         - {{ compiler('cuda') }}  # [not osx and cuda_compiler_version != "None"]
         - {{ cdt('libxext-devel') }}         # [linux]
@@ -111,6 +113,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('c') }}
+        - {{ stdlib("c") }}
         - {{ compiler('cxx') }}
         - {{ compiler('cuda') }}  # [not osx and cuda_compiler_version != "None"]
         - {{ cdt('libxext-devel') }}         # [linux]
@@ -156,6 +159,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('c') }}
+        - {{ stdlib("c") }}
         - {{ compiler('cxx') }}
         - {{ compiler('cuda') }}  # [not osx and cuda_compiler_version != "None"]
         - {{ cdt('libxext-devel') }}         # [linux]
